@@ -1,23 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react'; 
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import { Trash2, PlusCircle, Code2, Terminal, Layers, Sparkles } from 'lucide-react';
+import { Trash2, PlusCircle, Code2, Terminal, Layers, Loader2 } from 'lucide-react';
 
 export default function Dashboard() {
+    const { user, loading } = useContext(AuthContext); 
+    const navigate = useNavigate();
+
     const [snippets, setSnippets] = useState([]);
     const [form, setForm] = useState({ title: '', language: 'javascript', code: '', description: '' });
     const [refreshKey, setRefreshKey] = useState(0);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get('http://localhost:5000/api/snippets');
-                setSnippets(res.data);
-            } catch (error) {
-                console.error("Error fetching snippets:", error);
-            }
-        };
-        fetchData();
-    }, [refreshKey]);
+        if (!loading && !user) {
+            navigate('/login');
+        }
+    }, [user, loading, navigate]);
+
+    useEffect(() => {
+        if (user) {
+            const fetchData = async () => {
+                try {
+                    const res = await axios.get('http://localhost:5000/api/snippets');
+                    setSnippets(res.data);
+                } catch (error) {
+                    console.error("Error fetching snippets:", error);
+                }
+            };
+            fetchData();
+        }
+    }, [refreshKey, user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,6 +51,16 @@ export default function Dashboard() {
             console.error("Error deleting snippet:", error);
         }
     };
+
+    if (loading) {
+        return (
+            <div className="flex h-[80vh] items-center justify-center">
+                <Loader2 className="animate-spin text-accent" size={48} />
+            </div>
+        );
+    }
+
+    if (!user) return null;
 
     const inputClass = "w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-accent focus:bg-black/60 transition-all placeholder:text-textMuted/30";
 

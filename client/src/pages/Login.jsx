@@ -1,14 +1,19 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react'; 
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import logoImg from '../assets/logo.png'; 
-import { Mail, Lock, LogIn, ArrowRight } from 'lucide-react';
-
+import { Mail, Lock, ArrowRight, Loader2 } from 'lucide-react'; 
 export default function Login() {
     const [formData, setForm] = useState({ email: '', password: '' });
-    const { login } = useContext(AuthContext);
+    const { login, user, loading } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!loading && user) {
+            navigate('/');
+        }
+    }, [user, loading, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,6 +25,14 @@ export default function Login() {
             alert('Error: ' + (err.response?.data?.error || 'Login failed')); 
         }
     };
+
+    if (loading) {
+        return (
+            <div className="flex h-[80vh] items-center justify-center">
+                <Loader2 className="animate-spin text-accent" size={48} />
+            </div>
+        );
+    }
 
     const inputClass = "w-full bg-white/5 border border-white/10 text-white p-4 pl-12 rounded-2xl focus:outline-none focus:border-accent focus:bg-white/10 transition-all placeholder:text-textMuted/40";
 

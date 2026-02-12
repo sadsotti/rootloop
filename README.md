@@ -29,7 +29,7 @@ rootloop/
 └── server/                 # Backend API (Node.js + Express)
     ├── node_modules/       # Server dependencies
     ├── index.js            # Main Server Entry Point
-    └── schema.sql          # Database Structure (Tables & Relations)
+    └── database.sql          # Database Structure (Tables & Relations)
 ```
 
 ---

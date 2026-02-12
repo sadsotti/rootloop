@@ -27,7 +27,6 @@ rootloop/
 │       └── pages/          # Main Views (Home, Login, Social, News)
 │
 └── server/                 # Backend API (Node.js + Express)
-    ├── node_modules/       # Server dependencies
     ├── index.js            # Main Server Entry Point
     └── database.sql          # Database Structure (Tables & Relations)
 ```

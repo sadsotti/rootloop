@@ -1,4 +1,4 @@
-# --- Dipendenze ---
+# --- Dependencies ---
 node_modules/
 package-lock.json # (Opzionale: alcuni preferiscono tenerlo, ma se usi npm install va bene anche senza per progetti piccoli)
 yarn.lock

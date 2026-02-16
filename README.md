@@ -2,7 +2,7 @@
 > **The Developer's Neural Network.**  
 > Code Storage. Encrypted Comms. Global News.
 
-[![Live Demo](https://rootloop.up.railway.app/)]
+👉 **[Live Demo](https://rootloop.up.railway.app/)** 👈
 
 ---
 

@@ -22,7 +22,7 @@ export default function ChangePassword() {
 
         setLoading(true);
         try {
-            const res = await axios.put(`${import.meta.env.VITE_API_URL}/api/user/change-password`, {
+            const res = await axios.put(`${import.meta.env.VITE_API_URL}/user/change-password`, {
                 currentPassword,
                 newPassword
             });

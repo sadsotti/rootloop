@@ -18,7 +18,7 @@ export default function DangerZone() {
 
         setLoading(true);
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL}/api/user/terminate`);
+            await axios.delete(`${import.meta.env.VITE_API_URL}/user/terminate`);
             
             logout(); 
             navigate('/login'); 

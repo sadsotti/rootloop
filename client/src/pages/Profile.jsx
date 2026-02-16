@@ -29,7 +29,7 @@ function ProfileForm({ user }) {
 
     const handleUpdate = async () => {
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/api/user/update`, { bio, username, skills });
+            await axios.put(`${import.meta.env.VITE_API_URL}/user/update`, { bio, username, skills });
             alert('Profile configuration synced!');
         } catch (err) {
             console.error(err);

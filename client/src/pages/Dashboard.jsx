@@ -10,7 +10,7 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/snippets`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/snippets`);
                 setSnippets(res.data);
             } catch (error) {
                 console.error("Error fetching snippets:", error);
@@ -22,7 +22,7 @@ export default function Dashboard() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/snippets`, form);
+            await axios.post(`${import.meta.env.VITE_API_URL}/snippets`, form);
             setForm({ title: '', language: 'javascript', code: '', description: '' });
             setRefreshKey(oldKey => oldKey + 1);
         } catch (error) {
@@ -32,7 +32,7 @@ export default function Dashboard() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL}/api/snippets/${id}`);
+            await axios.delete(`${import.meta.env.VITE_API_URL}/snippets/${id}`);
             setRefreshKey(oldKey => oldKey + 1);
         } catch (error) {
             console.error("Error deleting snippet:", error);

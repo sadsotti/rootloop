@@ -24,7 +24,7 @@ export default function Social() {
         const getFriends = async () => {
             if (!user) return;
             try {
-                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/friends`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/friends`);
                 setFriends(res.data.filter(f => f.status === 'accepted'));
                 setRequests(res.data.filter(f => f.status === 'pending' && f.sender_id !== user.id));
                 setSentRequests(res.data.filter(f => f.status === 'pending' && f.sender_id === user.id));
@@ -38,7 +38,7 @@ export default function Social() {
         const getMessages = async () => {
             try {
                 const targetId = activeChat.id;
-                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/messages/${targetId}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/messages/${targetId}`);
                 setMessages(res.data);
             } catch (err) { console.error("Messages fetch error", err); }
         };
@@ -81,14 +81,14 @@ export default function Social() {
         e.preventDefault();
         if (!searchQuery.trim()) return;
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/search?q=${searchQuery}`);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/search?q=${searchQuery}`);
             setSearchResults(res.data);
         } catch (err) { console.error("Search error", err); }
     };
 
     const sendRequest = async (targetId) => {
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/friends/request`, { receiver_id: targetId });
+            await axios.post(`${import.meta.env.VITE_API_URL}/friends/request`, { receiver_id: targetId });
             setFriendsRefresh(prev => prev + 1);
             setSearchResults([]);
             setSearchQuery('');
@@ -98,7 +98,7 @@ export default function Social() {
 
     const acceptRequest = async (senderId) => {
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/api/friends/accept`, { sender_id: senderId });
+            await axios.put(`${import.meta.env.VITE_API_URL}/friends/accept`, { sender_id: senderId });
             setFriendsRefresh(prev => prev + 1);
         } catch (err) { console.error("Accept error", err); }
     };
@@ -111,7 +111,7 @@ export default function Social() {
         if (!window.confirm(msg)) return;
         
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL}/api/friends/${targetUserId}`);
+            await axios.delete(`${import.meta.env.VITE_API_URL}/friends/${targetUserId}`);
             setFriendsRefresh(prev => prev + 1);
             if (activeChat?.id === targetUserId) setActiveChat(null);
         } catch (err) { 
@@ -124,7 +124,7 @@ export default function Social() {
         e.preventDefault();
         if(!newMessage.trim()) return;
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/messages`, { 
+            await axios.post(`${import.meta.env.VITE_API_URL}/messages`, { 
                 receiver_id: activeChat.id, 
                 content: newMessage 
             });

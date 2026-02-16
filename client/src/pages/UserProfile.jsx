@@ -17,7 +17,7 @@ export default function UserProfile() {
 
         const fetchUserProfile = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/${id}`);
                 setData(res.data);
             } catch (err) { 
                 console.error("Errore nel recupero del profilo ID " + id, err);

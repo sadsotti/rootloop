@@ -2,6 +2,8 @@
 > **The Developer's Neural Network.**  
 > Code Storage. Encrypted Comms. Global News.
 
+[![Live Demo](https://rootloop.up.railway.app/)]
+
 ---
 
 ## 🟢 System Overview
@@ -49,7 +51,9 @@ rootloop/
 - **Security**: BcryptJS (Hashing), JWT (Sessions), CORS
 
 ### Database
-- **MySQL**: Relational data management for Users, Snippets, Friendships, Messages, and Notifications.
+- **Cloud Hosting**: Railway (App & DB)
+- **Database**: MySQL (Relational data for Users, Snippets, Friendships, Messages and Notifications)
+- **Deployment**: Continuous Deployment from GitHub
 
 ---
 
@@ -86,9 +90,9 @@ rootloop/
 
 ---
 
-## ⚙️ Installation & Setup Guide
+## ⚙️ Local Development Guide
 
-Follow these steps to deploy the local development environment.
+**Note**: The project is live! You don't need to install it to test it. However, if you want to run a local instance for development purposes, follow these steps.
 
 ### Prerequisites
 - Node.js
@@ -104,14 +108,12 @@ cd rootloop
 
 ### Step 2: Database Configuration
 
-1. Open your MySQL Client (Workbench, phpMyAdmin, or Command Line).
-2. Create a new database named `rootloop_db` (or use the one in the script).
-3. Open the file `server/database.sql`.
-4. Execute the entire SQL script to create the necessary tables (users, snippets, friendships, messages, notifications).
+1. Create a new database named `rootloop_db`.
+2. Execute the script found in `server/database.sql` to create tables.
 
 ### Step 3: Backend Setup
 
-Navigate to the server directory and install dependencies:
+Navigate to `/server`, install dependencies, and create a `.env` file:
 
 ```bash
 cd server
@@ -139,11 +141,17 @@ npm start
 
 ### Step 4: Frontend Setup
 
-Open a new terminal window, navigate to the client directory, and install dependencies:
+Navigate to `/client`, install dependencies, and create a `.env` file:
 
 ```bash
 cd client
 npm install
+```
+
+File: `client/.env`
+
+```bash
+VITE_API_URL=http://localhost:5000/api
 ```
 
 Start the Client:

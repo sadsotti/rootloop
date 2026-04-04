@@ -16,9 +16,7 @@ const db = mysql.createPool({
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT || 13987,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    ssl: process.env.DB_HOST !== 'localhost' ? { rejectUnauthorized: false } : false
 });
 
 const authenticateToken = (req, res, next) => {

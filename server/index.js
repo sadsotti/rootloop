@@ -226,8 +226,8 @@ app.put('/api/friends/accept', authenticateToken, async (req, res) => {
 
     try {
         await db.execute(
-            'UPDATE friendships SET status = "accepted" WHERE sender_id = ? AND receiver_id = ?',
-            [sender_id, req.user.id]
+        'UPDATE friendships SET status = \'accepted\' WHERE sender_id = ? AND receiver_id = ?',
+        [sender_id, req.user.id]
         );
         
         await db.execute(

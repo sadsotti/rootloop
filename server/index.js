@@ -222,17 +222,24 @@ app.get('/api/friends', authenticateToken, async (req, res) => {
 
 app.put('/api/friends/accept', authenticateToken, async (req, res) => {
     const { sender_id } = req.body;
+    console.log("ACCETTA AMICO - Dati ricevuti:", { sender_id, user_id: req.user.id }); // LOG DI DEBUG
+
     try {
         await db.execute(
             'UPDATE friendships SET status = "accepted" WHERE sender_id = ? AND receiver_id = ?',
             [sender_id, req.user.id]
         );
+        
         await db.execute(
             'INSERT INTO notifications (user_id, type, message) VALUES (?, ?, ?)',
             [sender_id, 'friend_accept', `${req.user.username} accepted your friend request!`]
         );
+        
         res.json({ message: 'Friendship accepted!' });
-    } catch (err) { res.status(500).json({ error: err.message }); }
+    } catch (err) {
+        console.error("ERRORE DETTAGLIATO:", err); // QUESTO APPARIRÀ SU RENDER
+        res.status(500).json({ error: err.sqlMessage || err.message });
+    }
 });
 
 app.delete('/api/friends/:friendId', authenticateToken, async (req, res) => {

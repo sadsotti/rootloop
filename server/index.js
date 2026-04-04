@@ -19,6 +19,10 @@ const db = mysql.createPool({
     ssl: process.env.DB_HOST !== 'localhost' ? { rejectUnauthorized: false } : false
 });
 
+app.get('/api/health', (req, res) => {
+    res.status(200).send('System Active');
+});
+
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];

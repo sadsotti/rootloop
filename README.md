@@ -128,6 +128,7 @@ DB_HOST=localhost
 DB_USER=root
 DB_PASS=your_mysql_password
 DB_NAME=rootloop_db
+DB_PORT=your_db_port
 JWT_SECRET=your_super_secure_secret_key
 PORT=5000
 ```

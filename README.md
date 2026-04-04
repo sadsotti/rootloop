@@ -2,7 +2,7 @@
 > **The Developer's Neural Network.**  
 > Code Storage. Encrypted Comms. Global News.
 
-👉 **[RootLoop](https://rootloop.up.railway.app/)** 👈
+👉 **[RootLoop](https://rootloop-s2i.netlify.app/)** 👈
 
 ---
 
@@ -51,9 +51,10 @@ rootloop/
 - **Security**: BcryptJS (Hashing), JWT (Sessions), CORS
 
 ### Database
-- **Cloud Hosting**: Railway (App & DB)
-- **Database**: MySQL (Relational data for Users, Snippets, Friendships, Messages and Notifications)
-- **Deployment**: Continuous Deployment from GitHub
+- **Backend Hosting**: Render (Free Tier)
+- **Frontend Hosting**: Netlify
+- **Database Hosting**: Aiven (MySQL Free Plan)
+- **Deployment**: Continuous Deployment from GitHub to Netlify (Frontend) and Render (Backend).
 
 ---
 
@@ -196,6 +197,9 @@ RootLoop embraces a dark, futuristic aesthetic inspired by cyberpunk culture. Th
 
 **Issue**: Module not found errors  
 **Solution**: Delete `node_modules` folders and `package-lock.json`, then run `npm install` again.
+
+**Issue**: `Page Not Found` on refresh (Netlify)
+**Solution**: Ensure the `_redirects` file is present in the `public` folder of the client.
 
 ---
 

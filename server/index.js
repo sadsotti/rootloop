@@ -19,8 +19,15 @@ const db = mysql.createPool({
     ssl: process.env.DB_HOST !== 'localhost' ? { rejectUnauthorized: false } : false
 });
 
-app.get('/api/health', (req, res) => {
-    res.status(200).send('System Active');
+app.get('/api/health', async (req, res) => {
+    try {
+        await db.execute('SELECT 1');
+        console.log('Ping executed: Render and Aiven are active.');
+        res.status(200).send('System & Database Active');
+    } catch (err) {
+        console.error('Error during Aiven ping:', err.message);
+        res.status(500).send('System Active, but Database Ping Failed');
+    }
 });
 
 const authenticateToken = (req, res, next) => {

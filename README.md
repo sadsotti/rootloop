@@ -89,6 +89,10 @@ rootloop/
 - **Node Termination**: Irreversible account deletion.
 - **Cascading Delete**: Automatically purges all associated data (snippets, chats, friendships) from the database upon termination.
 
+### 7. ⏱️ Infrastructure Reliability (Keep-Alive)
+- **Anti-Sleep Architecture**: Built-in mechanism to bypass Render and Aiven's "auto-sleep" on free tiers.
+- **Health Endpoint & Cron Jobs**: A dedicated `/api/health` endpoint triggered by an external cron job inserts timestamps into a `ping_log` table, ensuring both the backend and database remain constantly active with zero manual intervention.
+
 ---
 
 ## ⚙️ Local Development Guide
@@ -170,6 +174,7 @@ Open your browser and navigate to the Local URL provided by Vite (usually `http:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
+| GET | `/api/health` | System heartbeat to keep server and DB alive |
 | POST | `/api/auth/register` | Register a new user node |
 | POST | `/api/auth/login` | Authenticate and retrieve JWT |
 | GET | `/api/snippets` | Retrieve user's snippets |

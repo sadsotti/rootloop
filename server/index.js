@@ -21,7 +21,7 @@ const db = mysql.createPool({
 
 app.get('/api/health', async (req, res) => {
     try {
-        await db.execute('SELECT 1');
+        await db.execute('INSERT INTO ping_log () VALUES ()');
         console.log('Ping executed: Render and Aiven are active.');
         res.status(200).send('System & Database Active');
     } catch (err) {
